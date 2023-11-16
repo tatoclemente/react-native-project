@@ -1,141 +1,120 @@
-import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Image, FlatList, SectionList, TouchableHighlight, TouchableOpacity, Linking, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import ProfileScreen from './screens/ProfileScreen';
+import ExtraScreen from './screens/ExtraScreen';
+import HomeScreen from './screens/HomeScreen';
+import LogoTitle from './components/LogoTitle';
+import { Alert, Button, Text, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/Ionicons'
+import TechnologiesScreen from './screens/TechnologiesScreen';
+import ConvertToUppercase from './screens/ConvertToUppercase';
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator()
 
-export default function App() {
-
-  const [text, setText] = useState('')
-  // const [link, setLink] = useState("");
-  const [showTechnologies, setShowTechnologies] = useState(false)
-
-  // const [isMounted, setIsMounted] = useState(false);
-
-  // useEffect(() => {
-  //   if (isMounted) {
-  //     const initialUrl = Linking.getInitialURL();
-  //     console.log(initialUrl);
-  //     setLink(initialUrl);
-  //   }
-  // }, [isMounted]);
-
-  // useEffect(() => {
-  //   console.log(Linking.canOpenURL());
-  //   setIsMounted(true);
-  //   return () => {
-  //     setIsMounted(false);
-  //   };
-  // }, []);
-
-
-  _onPressButton = () => {
-    setShowTechnologies(!showTechnologies)
-  }
-
+const WorldScreen = (props) => {
   return (
-    <View style={styles.container}>
-      {/* <View>
-        <Button
-          title="Compartir en WhatsApp"
-          onPress={() => {
-            const intent = Linking.openURL("whatsapp://send?text={link}");
-            // console.log('hola');
-            Linking.sendIntent(intent);
-          }}
-          leftIcon={
-            <Image
-              source={require('./assets/img/Logo-whatsapp.png')}
-              style={{ width: 20, height: 20 }}
-            />
-          }
-        />
-      </View> */}
-      <View style={{alignItems: 'center', width: '100%'}}>
-        <Text style={{fontSize: 20, textAlign: "center", fontWeight: 'bold'}}>Hello World!</Text>
-        <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius:10, paddingHorizontal: 10, width: '90%', margin: '0 auto'}}
-          placeholder='Type here to capitalize'
-          onChangeText={text => setText(text)}
-          defaultValue={text}
-        />
-        <Text>{text.toUpperCase()}</Text>
-      </View>
-      <TouchableOpacity
-        onPress={_onPressButton}
-        underlayColor='red'
-      >
-        <View style={styles.showButton}>
-          <Text style={{color: 'white'}}>{showTechnologies? 'Hide Technologies' :'Show Technologies'}</Text>
-        </View>
-      </TouchableOpacity>
-      {showTechnologies &&
-      <View style={{paddingVertical: '10%'}}>
-        <SectionList
-          sections={[
-            {
-              title: 'Languages',
-              data: [
-                { key: 'Javascript', img: require('./assets/img/languages/js.png') },
-                { key: 'TypeScript', img: require('./assets/img/languages/typescript.png') },
-              ]
-            },
-            {
-              title: 'Front-End',
-              data: [
-                { key: 'HTML', img: require('./assets/img/frontend/html.png') },
-                { key: 'CSS', img: require('./assets/img/frontend/css.png') },
-                { key: 'React', img: require('./assets/img/frontend/React-icon.svg.png'), height: 180 },
-                { key: 'Next', img: require('./assets/img/frontend/next.png') },
-                { key: 'Cloudinary', img: require('./assets/img/frontend/cloudinary.png'), height: 130 },
-              ]
-            },
-            {
-              title: 'Back-End',
-              data: [
-                { key: 'Node', img: require('./assets/img/backend/nodejs_logo.png') },
-                { key: 'Express', img: require('./assets/img/backend/express-rombo.png') },
-                { key: 'PostgreSQL', img: require('./assets/img/backend/postgre.png') },
-                { key: 'Sequelize', img: require('./assets/img/backend/sequelize.png') },
-                { key: 'MongoDB', img: require('./assets/img/backend/mongo.png'), width: 90  },
-              ]
-            },
-
-          ]}
-
-          renderItem={({ item }) => (
-            <View style={styles.imageContainer}>
-              <Text>{item.key}</Text>
-              <Image source={item.img} style={{ width: item.width || 200, height: item.height || 200 }} />
-            </View>
-          )}
-          renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
-          keyExtractor={(item, index) => index}
-        />
-      </View>
-      } 
-      <StatusBar style="auto" />
+    <View style={{padding: 25}}>
+      <Text>This is the first Native App created by {props.name}!</Text>
     </View>
-  );
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    paddingTop: '20%',
-  },
-  showButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 160,
-    height: 37,
-    borderRadius: 20,
-    backgroundColor: 'steelblue',
-  },
-  imageContainer: {
-    alignItems: 'center',
-    paddingTop: '5%',
-    paddingBottom: '40%'
-  }
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      {/* <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            headerTitle: () => <LogoTitle />,
+            headerStyle: {
+              backgroundColor: "#f60f4f"
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+            // headerRight: () => <Button
+            //   title="JOIN"
+            //   color="#222"
+            //   onPress={() => {
+            //     Alert.alert(
+            //       "Impossible",
+            //       "Sorry but you don't have super powers",
+            //       [
+            //         {
+            //           text: "OK",
+            //         }
+            //       ]
+            //     )
+            //   }} />,
+          }}
+          initialParams={{ fromChild: 'Initial' }} />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={({ route }) => ({ title: route.params.name })} />
+        <Stack.Screen name="Extra" component={ExtraScreen} />
+      </Stack.Navigator> */}
+      <Tab.Navigator
+        initialRouteName='Awesome'
+        screenOptions={{
+          "tabBarActiveTintColor": "darkred",
+          headerTitle: () => <LogoTitle />,
+            headerStyle: {
+              backgroundColor: "#f60f4f"
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+            // headerRight: () => <Button
+            //   title="JOIN"
+            //   color="#222"
+            //   onPress={() => {
+            //     Alert.alert(
+            //       "Impossible",
+            //       "Sorry but you don't have super powers",
+            //       [
+            //         {
+            //           text: "OK",
+            //         }
+            //       ]
+            //     )
+        }
+
+        }
+      >
+        <Tab.Screen
+          name="Asgard"
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+            
+          }}
+        >
+          {props => <WorldScreen {...props} name="Tato Clemente" />}
+        </Tab.Screen>
+        <Tab.Screen
+          name="Conver To Uppercase"
+          component={ConvertToUppercase}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="text" color={color} size={size} />
+            )
+          }} />
+        <Tab.Screen
+          name="Technologies"
+          component={TechnologiesScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="people" color={color} size={size} />
+            )
+          }} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
+}
