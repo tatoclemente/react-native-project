@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "AwesomeProyect",
-    "slug": "AwesomeProyect",
+    "name": "Gustavo Clemente",
+    "slug": "GustavoClemente",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/img/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/img/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,17 +19,17 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/img/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.tatoclemente23.AwesomeProyect"
+      "package": "com.tatoclemente23.GustavoClemente"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/img/logo.png"
     },
     "extra": {
       "eas": {
-        "projectId": "57352266-838c-4b54-aaa9-0d83b73c2290"
+        "projectId": "1b7a6a41-e865-485d-b9d2-f830299f7cf7"
       }
     }
   }
